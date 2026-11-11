@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shahzaib — Senior SEO Specialist & Search Growth Partner." />
+  <title>Shahzaib — Senior SEO Specialist | Liquid Glass Portfolio</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #030407;
+      --glass-base: rgba(255, 255, 255, 0.025);
+      --glass-surface: rgba(255, 255, 255, 0.045);
+      --glass-card: rgba(255, 255, 255, 0.06);
+      --glass-elevated: rgba(255, 255, 255, 0.09);
+      
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-specular: rgba(255, 255, 255, 0.28);
+      --glass-specular-soft: rgba(255, 255, 255, 0.15);
+      
+      --liquid-gold: #f2cb6c;
+      --liquid-gold-glow: rgba(242, 203, 108, 0.28);
+      --liquid-cyan: #4ef2bb;
+      --liquid-purple: #7952ff;
+      
+      --text: #ffffff;
+      --text-muted: #9ba3b4;
+      --text-faint: #596173;
+      
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --radius-full: 9999px;
+      
+      --blur-strength: 24px;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ========================================================
+       AMBIENT LIQUID CANVAS (Mesh Gradients & Fluid Orbs)
+    ======================================================== */
+    .liquid-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: floatFluid 22s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #f2cb6c 0%, rgba(242, 203, 108, 0) 70%);
+      top: -10%;
+      left: -5%;
+      animation-duration: 20s;
+    }
+
+    .orb-2 {
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, #7952ff 0%, rgba(121, 82, 255, 0) 70%);
+      top: 30%;
+      right: -10%;
+      animation-duration: 25s;
+    }
+
+    .orb-3 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #38ef7d 0%, rgba(56, 239, 125, 0) 70%);
+      bottom: 5%;
+      left: 15%;
+      opacity: 0.2;
+      animation-duration: 28s;
+    }
+
+    @keyframes floatFluid {
+      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+      50% { transform: translate(60px, 80px) scale(1.1) rotate(45deg); }
+      100% { transform: translate(-40px, 50px) scale(0.92) rotate(-30deg); }
+    }
+
+    /* Ambient Glass Texture Noise Overlay */
+    .glass-noise {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+      background-size: 32px 32px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ========================================================
+       CORE LIQUID GLASS CLASS SYSTEM
+    ======================================================== */
+    .glass-panel {
+      background: var(--glass-card);
+      backdrop-filter: blur(var(--blur-strength));
+      -webkit-backdrop-filter: blur(var(--blur-strength));
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-specular);
+      border-left: 1px solid var(--glass-specular-soft);
+      border-radius: var(--radius-md);
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      border-top-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px var(--liquid-gold-glow),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px);
+    }
+
+    /* Specular light streak */
+    .glass-panel::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #e0e7ff 70%, var(--liquid-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-text {
+      background: linear-gradient(135deg, #fff2af 0%, var(--liquid-gold) 60%, #cf9f2e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--liquid-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      background: rgba(242, 203, 108, 0.08);
+      border: 1px solid rgba(242, 203, 108, 0.25);
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(12px);
+      margin-bottom: 24px;
+    }
+
+    /* ========================================================
+       FLOATING GLASS DOCK (NAVIGATION)
+    ======================================================== */
+    .nav-wrapper {
+      position: fixed;
+      top: 24px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    .glass-dock {
+      background: rgba(14, 17, 24, 0.55);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: var(--radius-full);
+      padding: 8px 14px 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .dock-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    .dock-brand span { color: var(--liquid-gold); }
+
+    .dock-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .dock-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .dock-links a:hover {
+      color: #fff;
+    }
+
+    /* Liquid Glass Buttons */
+    .btn-liquid {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .btn-liquid-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(242, 203, 108, 0.4));
+      border: 1px solid rgba(242, 203, 108, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+      color: #ffffff;
+      box-shadow: 
+        0 8px 24px var(--liquid-gold-glow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-liquid-primary:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(242, 203, 108, 0.6));
+      box-shadow: 
+        0 12px 32px rgba(242, 203, 108, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-liquid-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-specular-soft);
+      color: var(--text);
+    }
+
+    .btn-liquid-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* ========================================================
+       HERO SECTION
+    ======================================================== */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 90px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-h1 {
+      font-size: clamp(2.8rem, 5.2vw, 4.8rem);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 48ch;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .metrics-dock {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .metric-col b {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .metric-col span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    /* Hero Liquid Display Widget */
+    .hero-glass-widget {
+      padding: 36px;
+      border-radius: var(--radius-lg);
+    }
+
+    .pulse-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--liquid-cyan);
+      margin-bottom: 28px;
+      background: rgba(78, 242, 187, 0.08);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(78, 242, 187, 0.2);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--liquid-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--liquid-cyan);
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .stat-bar-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .stat-liquid-capsule {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-liquid-capsule .lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .stat-liquid-capsule .val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--liquid-gold);
+    }
+
+    .market-pills-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+
+    .market-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .market-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-full);
+      padding: 6px 14px;
+      color: var(--text);
+    }
+
+    /* ========================================================
+       SECTIONS HEADINGS
+    ======================================================== */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-head {
+      margin-bottom: 50px;
+      max-width: 650px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    /* ========================================================
+       ABOUT & PHILOSOPHY
+    ======================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+    }
+
+    .about-card {
+      padding: 44px;
+    }
+
+    .about-card p {
+      font-size: 1.12rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+      margin-bottom: 24px;
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy-glass {
+      padding: 40px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(242, 203, 108, 0.04));
+      border-left: 2px solid var(--liquid-gold);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .philosophy-glass h3 {
+      font-size: 1.4rem;
+      color: var(--liquid-gold);
+    }
+
+    .philosophy-glass p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ========================================================
+       EXPERTISE & TOOLS
+    ======================================================== */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .stack-box {
+      padding: 36px;
+    }
+
+    .stack-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 24px;
+    }
+
+    .glass-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .glass-tag {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+    }
+
+    .glass-tag:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--liquid-gold);
+      transform: translateY(-2px);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cert-glass-item {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .cert-glass-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .cert-glass-issuer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--liquid-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ========================================================
+       CASE STUDIES (Interactive Glass Filter)
+    ======================================================== */
+    .filter-dock {
+      display: inline-flex;
+      padding: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(20px);
+      margin-bottom: 40px;
+      gap: 8px;
+    }
+
+    .filter-tab {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-tab.active, .filter-tab:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .cases-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .case-card {
+      padding: 44px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .case-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      color: var(--liquid-gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .case-heading {
+      font-size: 2.1rem;
+      margin-bottom: 12px;
+    }
+
+    .case-overview {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+      line-height: 1.6;
+    }
+
+    .case-challenge-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-top: 1px solid var(--glass-border);
+      padding-top: 24px;
+    }
+
+    .challenge-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .challenge-text {
+      font-size: 0.94rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    /* KPI Glass Island */
+    .kpi-island {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-cell b {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.1rem;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .kpi-cell span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .gsc-verified-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      border-top: 1px dashed var(--glass-border);
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ========================================================
+       REVIEWS MARQUEE (LIQUID CAROUSEL)
+    ======================================================== */
+    .marquee-viewport {
+      overflow: hidden;
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+      padding: 16px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 28px;
+      width: max-content;
+      animation: smoothMarquee 48s linear infinite;
+    }
+
+    .marquee-viewport:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .review-glass-card {
+      background: var(--glass-card);
+      backdrop-filter: blur(var(--blur-strength));
+      -webkit-backdrop-filter: blur(var(--blur-strength));
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-specular);
+      border-radius: var(--radius-md);
+      flex: 0 0 380px;
+      width: 380px;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+      transition: var(--transition);
+    }
+
+    .review-glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .review-body {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #e6ebf2;
+      font-weight: 300;
+    }
+
+    .review-body::before { content: '“'; color: var(--liquid-gold); font-size: 1.4rem; margin-right: 4px; }
+    .review-body::after { content: '”'; color: var(--liquid-gold); font-size: 1.4rem; margin-left: 4px; }
+
+    .review-author b {
+      font-size: 0.98rem;
+      display: block;
+      color: #fff;
+    }
+
+    .review-author span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    @keyframes smoothMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ========================================================
+       LIQUID AUDIT CONTACT DOCK
+    ======================================================== */
+    .contact-island {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 60px;
+      background: radial-gradient(circle at 10% 10%, rgba(242, 203, 108, 0.08), transparent 40%),
+                  linear-gradient(135deg, var(--glass-card), rgba(255, 255, 255, 0.02));
+      border-radius: var(--radius-lg);
+    }
+
+    .contact-form-glass {
+      padding: 36px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-group label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .glass-input {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .glass-input:focus {
+      border-color: var(--liquid-gold);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 0 20px var(--liquid-gold-glow);
+    }
+
+    /* ========================================================
+       FOOTER
+    ======================================================== */
+    footer {
+      padding: 40px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-dock {
+      padding: 24px 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ========================================================
+       RESPONSIVE BREAKPOINTS
+    ======================================================== */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; gap: 50px; padding-top: 140px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .case-card { grid-template-columns: 1fr; }
+      .contact-island { grid-template-columns: 1fr; padding: 40px; }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .stack-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .dock-links { display: none; }
+      .glass-dock { padding: 8px 14px 8px 18px; }
+      .metrics-dock { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .contact-island { padding: 26px; }
+      .review-glass-card { flex-basis: 85vw; width: 85vw; }
+      .wrap { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Liquid Canvas -->
+  <div class="liquid-mesh">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="glass-noise"></div>
+
+  <!-- Floating Liquid Glass Nav Dock -->
+  <header class="nav-wrapper">
+    <nav class="glass-dock">
+      <a href="#" class="dock-brand">
+        SHAHZAIB<span>.</span>
+      </a>
+      <ul class="dock-links">
+        <li><a href="#about">Philosophy</a></li>
+        <li><a href="#capabilities">Stack</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+        <li><a href="#reviews">Testimonials</a></li>
+      </ul>
+      <a href="#contact" class="btn-liquid btn-liquid-primary">Free SEO Audit →</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">
+          <span>Search Growth Partner</span>
+        </div>
+        <h1 class="hero-h1">
+          From buried to <span class="gold-text">page one.</span>
+        </h1>
+        <p class="hero-sub">
+          Turning organic search visibility into sustainable, measurable revenue for ambitious businesses across 
+          <strong>the US, UK, UAE, and Pakistan.</strong>
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-liquid btn-liquid-primary">Request Live Audit →</a>
+          <a href="#cases" class="btn-liquid btn-liquid-secondary">Explore Proof Data</a>
+        </div>
+
+        <div class="metrics-dock glass-panel">
+          <div class="metric-col">
+            <b>5+</b>
+            <span>Years Exp</span>
+          </div>
+          <div class="metric-col">
+            <b>4</b>
+            <span>Global Mkts</span>
+          </div>
+          <div class="metric-col">
+            <b>20+</b>
+            <span>Brands Ranked</span>
+          </div>
+          <div class="metric-col">
+            <b>100%</b>
+            <span>Revenue-Led</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual Widget -->
+      <div class="hero-glass-widget glass-panel">
+        <div class="pulse-status">
+          <div class="pulse-dot"></div>
+          <span>Active Client Engagement: Q1/Q2</span>
+        </div>
+
+        <div class="stat-bar-group">
+          <div class="stat-liquid-capsule">
+            <span class="lbl">Highest Verified Impressions</span>
+            <span class="val">820,000+</span>
+          </div>
+          <div class="stat-liquid-capsule">
+            <span class="lbl">Peak Campaign Velocity</span>
+            <span class="val">Pos #8.3</span>
+          </div>
+          <div class="stat-liquid-capsule">
+            <span class="lbl">Specialty Growth Focus</span>
+            <span class="val">E-Com & Local</span>
+          </div>
+        </div>
+
+        <div class="market-pills-label">Active Market Coverage</div>
+        <div class="market-pills">
+          <span class="market-pill">🇺🇸 United States</span>
+          <span class="market-pill">🇬🇧 United Kingdom</span>
+          <span class="market-pill">🇦🇪 UAE</span>
+          <span class="market-pill">🇵🇰 Pakistan</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy & About -->
+    <section id="about">
+      <div class="section-head">
+        <div class="eyebrow">Mindset</div>
+        <h2>Results before reasons.</h2>
+        <p>SEO that operates on commercial impact rather than vanity dashboard spikes.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card glass-panel">
+          <p>
+            I'm Shahzaib, a dedicated SEO specialist with over five years of hands-on experience taking websites 
+            from search obscurity straight to top ranking positions.
+          </p>
+          <p>
+            My portfolio spans four global markets across fintech, high-ticket e-commerce, surgical healthcare, 
+            and digital platforms. I diagnose and execute what truly influences rankings: structural site health, 
+            content mapped to commercial intent, and high-equity link acquisition.
+          </p>
+          <p>
+            Every adjustment is tracked back to traffic conversions, qualified inbound calls, and actual pipeline revenue.
+          </p>
+        </div>
+
+        <div class="philosophy-glass glass-panel">
+          <h3>The Core Standard</h3>
+          <p>
+            Keyword rankings mean nothing if visitors bounce. My approach bridges the gap between Google crawler logic, 
+            technical speed pipelines, and human conversion psychology.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities & Stack -->
+    <section id="capabilities">
+      <div class="section-head">
+        <div class="eyebrow">Arsenal</div>
+        <h2>Capabilities & Diagnostic Stack</h2>
+        <p>A battle-tested methodology designed for maximum search equity.</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-box glass-panel">
+          <div class="stack-title">Core Disciplines</div>
+          <div class="glass-tags">
+            <span class="glass-tag">Technical SEO Architecture</span>
+            <span class="glass-tag">Search Intent Optimization</span>
+            <span class="glass-tag">High-Equity Link Building</span>
+            <span class="glass-tag">Local SEO & Map Pack Domination</span>
+            <span class="glass-tag">E-Commerce Schema Silos</span>
+            <span class="glass-tag">SERP Cannibalization Resolution</span>
+          </div>
+        </div>
+
+        <div class="stack-box glass-panel">
+          <div class="stack-title">Analytics & Intelligence Tools</div>
+          <div class="glass-tags">
+            <span class="glass-tag">Google Search Console</span>
+            <span class="glass-tag">Google Analytics 4 (GA4)</span>
+            <span class="glass-tag">Ahrefs Pro</span>
+            <span class="glass-tag">SEMrush Guru</span>
+            <span class="glass-tag">Screaming Frog SEO Spider</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-title" style="margin-bottom: 24px;">Verified Academy Certifications</div>
+      <div class="certs-grid">
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">On-Page & Technical SEO</span>
+          <span class="cert-glass-issuer">SEMrush Academy</span>
+        </div>
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">Lead Generation with SEO</span>
+          <span class="cert-glass-issuer">SEMrush Academy</span>
+        </div>
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">Advanced SEO Masterclass</span>
+          <span class="cert-glass-issuer">HubSpot Academy</span>
+        </div>
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">AI in SEO Strategy</span>
+          <span class="cert-glass-issuer">Ahrefs Academy</span>
+        </div>
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">AEO (Answer Engine Optimization)</span>
+          <span class="cert-glass-issuer">HubSpot Academy</span>
+        </div>
+        <div class="cert-glass-item glass-panel">
+          <span class="cert-glass-name">GEO (Generative Engine Optimization)</span>
+          <span class="cert-glass-issuer">Ahrefs Academy</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="cases">
+      <div class="section-head">
+        <div class="eyebrow">Demonstrated Impact</div>
+        <h2>Selected Case Studies</h2>
+        <p>Live rankings and Search Console performance snapshots.</p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-dock">
+        <button class="filter-tab active" onclick="applyFilter('all', this)">All Projects</button>
+        <button class="filter-tab" onclick="applyFilter('ecom', this)">E-Commerce</button>
+        <button class="filter-tab" onclick="applyFilter('local', this)">Local & Clinics</button>
+        <button class="filter-tab" onclick="applyFilter('global', this)">Global SaaS</button>
+      </div>
+
+      <div class="cases-container">
+
+        <!-- Case 1: Qbit -->
+        <article class="case-card glass-panel" data-cat="ecom">
+          <div>
+            <div class="case-tag">Case Study A · E-Commerce · Pakistan</div>
+            <h3 class="case-heading">Qbit Custom PCs</h3>
+            <p class="case-overview">Online retailer delivering custom-built high-performance gaming rigs and components.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Fresh domain with practically zero search footprint, head-to-head with large legacy retailers for high-intent gaming hardware queries.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Reconstructed product catalog schema, created custom PC build guides targeting long-tail searches, and resolved technical crawl roadblocks.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>10.8</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>820K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>13.6K</b><span>Total Clicks</span></div>
+              <div class="kpi-cell"><b>1.7%</b><span>Avg CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Jun 2025–Jul 2026</div>
+          </div>
+        </article>
+
+        <!-- Case 2: 9xMarkets -->
+        <article class="case-card glass-panel" data-cat="global">
+          <div>
+            <div class="case-tag">Case Study B · Trading & SaaS · Global</div>
+            <h3 class="case-heading">9xMarkets Platform</h3>
+            <p class="case-overview">Global multi-asset online trading platform supporting Forex, Crypto, and stock analytics.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Primary commercial keywords stranded past Page 10, rendering the trading platform effectively invisible to active retail investors.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Engineered a complete topical silo architecture, balanced internal link equity, and eliminated severe cannibalization issues.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>14.6</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>146K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>5.3K</b><span>Total Clicks</span></div>
+              <div class="kpi-cell"><b>3.6%</b><span>Avg CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Apr–Jul 2026 (Ongoing)</div>
+          </div>
+        </article>
+
+        <!-- Case 3: Roller Skates USA -->
+        <article class="case-card glass-panel" data-cat="ecom">
+          <div>
+            <div class="case-tag">Case Study C · Retail E-Commerce · USA</div>
+            <h3 class="case-heading">Roller Skates USA</h3>
+            <p class="case-overview">Specialty US outdoor sports retailer providing roller skates, skateboards, and safety gear.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">High commercial search volume, but inconsistent SERP presence ahead of high-converting holiday traffic surges.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Sharp collection-level SEO overhaul, targeted seasonal keywords, and streamlined mobile indexation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>8.3</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>46K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>3.75K</b><span>Clicks (7 Days)</span></div>
+              <div class="kpi-cell"><b>8.2%</b><span>Avg CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Peak Sprint · Dec 2025</div>
+          </div>
+        </article>
+
+        <!-- Case 4: TFAUAE -->
+        <article class="case-card glass-panel" data-cat="local">
+          <div>
+            <div class="case-tag">Case Study D · Sports Academy · UAE</div>
+            <h3 class="case-heading">TFAUAE Football Academy</h3>
+            <p class="case-overview">Youth and adult competitive football training institution based in the United Arab Emirates.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Near-zero local visibility for city-specific training queries, overshadowed by established local clubs.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Rebuilt Google Business Profile signals, created age-bracket landing hubs, and established local UAE sports citations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>7.6</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>91K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>2.3K</b><span>Total Clicks</span></div>
+              <div class="kpi-cell"><b>2.5%</b><span>Avg CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Apr–Jul 2026</div>
+          </div>
+        </article>
+
+        <!-- Case 5: Marovis -->
+        <article class="case-card glass-panel" data-cat="global">
+          <div>
+            <div class="case-tag">Case Study E · Streaming Service · Germany</div>
+            <h3 class="case-heading">Marovis IPTV</h3>
+            <p class="case-overview">Digital entertainment subscription service streaming worldwide channel networks across Germany.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Hyper-competitive streaming space suffering from indexing restrictions and low visibility.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Conducted crawl optimization, re-mapped buyer transactional queries, and built fast-loading product hubs.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>15.5</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>2.68K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>823</b><span>Total Clicks</span></div>
+              <div class="kpi-cell"><b>30.7%</b><span>High CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Apr–May 2026</div>
+          </div>
+        </article>
+
+        <!-- Case 6: Renew Wound -->
+        <article class="case-card glass-panel" data-cat="local">
+          <div>
+            <div class="case-tag">Case Study F · Healthcare Clinic · USA</div>
+            <h3 class="case-heading">Renew Wound Clinic</h3>
+            <p class="case-overview">Specialty medical clinic administering advanced therapy for non-healing chronic wounds.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Substantial SERP impressions, but poor conversion click-through rates due to confusing medical titles.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Re-crafted metadata for patient search intent, structured clinical procedures, and expanded patient resources.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>24.5</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>48.9K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>248</b><span>Inquiries</span></div>
+              <div class="kpi-cell"><b>+180%</b><span>CTR Jump</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Apr–Jul 2026</div>
+          </div>
+        </article>
+
+        <!-- Case 7: Agape Weight Loss -->
+        <article class="case-card glass-panel" data-cat="local">
+          <div>
+            <div class="case-tag">Case Study G · Medical Practice · USA</div>
+            <h3 class="case-heading">Agape Medical Weight Loss</h3>
+            <p class="case-overview">Medically-supervised weight management clinic offering physician-guided metabolic programs.</p>
+            <div class="case-challenge-grid">
+              <div>
+                <span class="challenge-label">The Challenge</span>
+                <p class="challenge-text">Subdued local search prominence against major health publications and national telemedicine aggregators.</p>
+              </div>
+              <div>
+                <span class="challenge-label">The Strategy</span>
+                <p class="challenge-text">Infused medical E-E-A-T signals, created physician profile schemas, and built localized treatment pages.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-island">
+            <div class="kpi-grid">
+              <div class="kpi-cell"><b>22.8</b><span>Avg Position</span></div>
+              <div class="kpi-cell"><b>5.91K</b><span>Impressions</span></div>
+              <div class="kpi-cell"><b>181</b><span>Appointments</span></div>
+              <div class="kpi-cell"><b>3.1%</b><span>Avg CTR</span></div>
+            </div>
+            <div class="gsc-verified-tag">Verified GSC Snapshot · Apr–Jul 2026</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="reviews">
+      <div class="section-head">
+        <div class="eyebrow">Reputation</div>
+        <h2>Direct Client Testimonials</h2>
+        <p>Unfiltered feedback from founders and marketing executives.</p>
+      </div>
+
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          <!-- 8 Unique Client Reviews (Cloned for infinite marquee flow) -->
+          <div class="review-glass-card">
+            <p class="review-body">Our organic traffic barely existed before we brought Shahzaib in. Within a few months we were finally showing up for the searches that actually convert.</p>
+            <div class="review-author">
+              <b>Michael Turner</b>
+              <span>Founder, Renew Wound</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">He doesn't just chase rankings, he ties everything back to revenue. That's rare, and it's exactly what we needed.</p>
+            <div class="review-author">
+              <b>Jennifer Collins</b>
+              <span>Marketing Lead, Agape Weight Loss</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Very responsive and genuinely knows the technical side of SEO. Our site issues that had been ignored for years finally got fixed.</p>
+            <div class="review-author">
+              <b>David Reyes</b>
+              <span>Owner, Roller Skates USA</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Our impressions and clicks kept climbing month over month. It's clear the strategy behind it was well thought out.</p>
+            <div class="review-author">
+              <b>Ahmed Raza</b>
+              <span>CEO, Qbit</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Shahzaib was upfront about timelines and what to expect, and delivered exactly what he promised. Rankings improved steadily and stayed there.</p>
+            <div class="review-author">
+              <b>Bilal Ahmed</b>
+              <span>Operations Manager, 9xMarkets</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Working with him felt different from other freelancers we tried. He actually explained the why behind every change he made to the site.</p>
+            <div class="review-author">
+              <b>Usman Tariq</b>
+              <span>Director, TFAUAE</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Great communication throughout and solid results. Our search visibility in a very competitive niche improved a lot faster than we expected.</p>
+            <div class="review-author">
+              <b>Hamza Khan</b>
+              <span>Co-founder, Marovis</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Professional, data-driven, and easy to work with. He kept us updated at every step and the numbers speak for themselves.</p>
+            <div class="review-author">
+              <b>Ali Hassan</b>
+              <span>Marketing Manager</span>
+            </div>
+          </div>
+
+          <!-- Seamless Loop Clone -->
+          <div class="review-glass-card">
+            <p class="review-body">Our organic traffic barely existed before we brought Shahzaib in. Within a few months we were finally showing up for the searches that actually convert.</p>
+            <div class="review-author">
+              <b>Michael Turner</b>
+              <span>Founder, Renew Wound</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">He doesn't just chase rankings, he ties everything back to revenue. That's rare, and it's exactly what we needed.</p>
+            <div class="review-author">
+              <b>Jennifer Collins</b>
+              <span>Marketing Lead, Agape Weight Loss</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Very responsive and genuinely knows the technical side of SEO. Our site issues that had been ignored for years finally got fixed.</p>
+            <div class="review-author">
+              <b>David Reyes</b>
+              <span>Owner, Roller Skates USA</span>
+            </div>
+          </div>
+
+          <div class="review-glass-card">
+            <p class="review-body">Our impressions and clicks kept climbing month over month. It's clear the strategy behind it was well thought out.</p>
+            <div class="review-author">
+              <b>Ahmed Raza</b>
+              <span>CEO, Qbit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Liquid Contact & Audit Section -->
+    <section id="contact">
+      <div class="contact-island glass-panel">
+        <div>
+          <div class="eyebrow">Action</div>
+          <h2 style="margin-bottom: 16px;">Let's rank your website.</h2>
+          <p style="color: var(--text-muted); margin-bottom: 32px; font-size: 1.05rem;">
+            Drop your website URL below. I will personally run a technical diagnostic and outline 
+            three immediate growth opportunities to boost your organic search performance.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <a href="https://wa.me/923064925044" target="_blank" rel="noopener" class="btn-liquid btn-liquid-primary" style="justify-content: center; background: rgba(37, 211, 102, 0.18); border-color: #25D366; color: #fff;">
+              Message via WhatsApp (+92 306 4925044) →
+            </a>
+            <a href="https://www.linkedin.com/in/seo-expert-shahzaib/" target="_blank" rel="noopener" class="btn-liquid btn-liquid-secondary" style="justify-content: center;">
+              Connect on LinkedIn Profile →
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form-glass" onsubmit="event.preventDefault(); alert('Audit request received! Shahzaib will review your domain and respond within 24 hours.');">
+          <div class="field-group">
+            <label for="c-name">Full Name</label>
+            <input type="text" id="c-name" class="glass-input" placeholder="e.g. David Reyes" required />
+          </div>
+
+          <div class="field-group">
+            <label for="c-url">Domain / Website URL</label>
+            <input type="url" id="c-url" class="glass-input" placeholder="https://yourbrand.com" required />
+          </div>
+
+          <div class="field-group">
+            <label for="c-notes">Primary Objective</label>
+            <textarea id="c-notes" rows="3" class="glass-input" placeholder="e.g. Expand US e-commerce reach, fix ranking drops..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-liquid btn-liquid-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+            Request Free Growth Audit →
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-dock glass-panel">
+        <span>© 2026 Shahzaib. All Rights Reserved.</span>
+        <span>SEO SPECIALIST · US · UK · UAE · PK</span>
+        <a href="#" style="color: var(--liquid-gold); text-decoration: none;">Return to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Category Filtering -->
+  <script>
+    function applyFilter(category, buttonElement) {
+      document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
+      buttonElement.classList.add('active');
+
+      const cards = document.querySelectorAll('.case-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'grid';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
